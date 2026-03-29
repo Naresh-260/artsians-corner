@@ -3,8 +3,16 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-green)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-18%2B-blue)](https://reactjs.org/)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://artsians-corner.vercel.app)
 
 A modern, full-stack e-commerce marketplace platform built with the MERN stack (MongoDB, Express.js, React, Node.js) that connects artisans (vendors) with customers (buyers).
+
+## 🌐 Live Demo
+
+| Service | URL |
+|---------|-----|
+| 🖥️ Frontend | [https://artsians-corner.vercel.app](https://artsians-corner.vercel.app) |
+| ⚙️ Backend API | [https://artsians-corner.onrender.com](https://artsians-corner.onrender.com) |
 
 ## 🎯 Project Overview
 
@@ -91,7 +99,7 @@ artsians-corner/
 
 ## 📋 Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 - MongoDB Atlas account (or local MongoDB)
 - Cloudinary account
@@ -101,7 +109,7 @@ artsians-corner/
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/Naresh-260/artsians-corner.git
 cd artsians-corner
 ```
 
@@ -138,7 +146,8 @@ npm install
 
 Create `.env` file in the frontend directory:
 ```env
-REACT_APP_RAZORPAY_KEY_ID=your_razorpay_key_id
+VITE_API_URL=http://localhost:5000/api
+VITE_RAZORPAY_KEY_ID=your_razorpay_key_id
 ```
 
 Start the development server:
@@ -149,6 +158,33 @@ npm run dev
 ### 4. Access the Application
 - Frontend: http://localhost:5173
 - Backend API: http://localhost:5000
+
+## ☁️ Deployment
+
+This project is deployed using:
+
+| Service | Platform | URL |
+|---------|----------|-----|
+| Frontend | [Vercel](https://vercel.com) | [https://artsians-corner.vercel.app](https://artsians-corner.vercel.app) |
+| Backend | [Render](https://render.com) | [https://artsians-corner.onrender.com](https://artsians-corner.onrender.com) |
+| Database | MongoDB Atlas | Cloud hosted |
+| Images | Cloudinary | Cloud hosted |
+
+### Deploy Your Own
+
+#### Backend (Render)
+1. Create a new **Web Service** on Render
+2. Connect your GitHub repo
+3. Set **Root Directory** to `backend`
+4. Set **Start Command** to `node server.js`
+5. Add all environment variables from the `.env` example above
+
+#### Frontend (Vercel)
+1. Import your GitHub repo on Vercel
+2. Set **Root Directory** to `frontend/myapp`
+3. Set **Framework** to Vite
+4. Add environment variable: `VITE_API_URL=https://your-render-url.onrender.com/api`
+5. Deploy
 
 ## 📁 Project Structure Explained
 
@@ -277,7 +313,6 @@ The application implements comprehensive error handling:
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
 
 ## 👨‍💻 Author
 
