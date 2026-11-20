@@ -3,8 +3,10 @@ import generateToken from "../utils/generateToken.js";
 
 export const registerUser = async (req, res) => {
   try {
-    const payload = req.body && typeof req.body === "object" ? req.body : {};
-    const { name, email, password, role } = payload;
+
+    console.log(req);
+   
+    const { name, email, password, role } = req.body;
 
     if (!name || !email || !password) {
       return res.status(400).json({
