@@ -84,13 +84,18 @@ function SellerDashboardPage() {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
     setFormError("");
   };
+const handleImageChange = (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    setImage(file);
-    setPreview(URL.createObjectURL(file));
-  };
+  // Clean up the previous object URL to prevent memory leaks
+  if (preview) {
+    URL.revokeObjectURL(preview);
+  }
+
+  setImage(file);
+  setPreview(URL.createObjectURL(file));
+};
 
   const resetForm = () => {
     setForm(emptyForm);
@@ -349,29 +354,44 @@ function SellerDashboardPage() {
                     onChange={handleFormChange}
                   />
                 </div>
-                <div className="col-md-6">
-                  <label className="form-label">
-                    Product Image {!editId && "*"}
-                  </label>
-                  <input
-                    type="file"
-                    className="form-control"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                  />
-                  {editId && !preview && (
-                    <small className="text-muted">Leave empty to keep current image.</small>
-                  )}
-                </div>
-                {preview && (
-                  <div className="col-md-6 d-flex align-items-end">
-                    <img
-                      src={preview}
-                      alt="Preview"
-                      style={{ height: 80, width: 80, objectFit: "cover", borderRadius: 8, border: "1px solid #ddd" }}
-                    />
-                  </div>
-                )}
+                <div className="row"> {/* Assuming this is wrapped in a row */} 
+  
+            <div className="col-md-6">
+              <label className="form-label" htmlFor="productImage">
+                Product Image {!editId && "*"}
+              </label>
+              <input
+                id="productImage"
+                type="file"
+                className="form-control"
+                accept="image/*"
+                onChange={handleImageChange}
+                key={editId || "new"} 
+              />
+              {editId && !preview && (
+                <small className="text-muted d-block mt-1">
+                  Leave empty to keep current image.
+                </small>
+              )}
+            </div>
+
+            {preview && (
+              <div className="col-md-6 d-flex align-items-end mt-3 mt-md-0">
+                <img
+                  src={preview}
+                  alt="Preview"
+                  style={{
+                    height: "80px",
+                    width: "80px",
+                    objectFit: "cover",
+                    borderRadius: "8px",
+                    border: "1px solid #ddd",
+                  }}
+                />
+              </div>
+            )}
+
+          </div>    
               </div>
 
               <div className="d-flex gap-2 mt-3">
