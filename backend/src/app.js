@@ -17,6 +17,15 @@ app.use(cors({
   credentials: true
 }));
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+  if (req.body === undefined) {
+    req.body = {};
+  }
+  next();
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);

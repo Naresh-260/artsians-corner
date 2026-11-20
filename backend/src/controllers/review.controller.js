@@ -13,7 +13,7 @@ import Product from "../models/product.js";
 export const createReview = async (req, res) => {
   try {
    const { productId } = req.params;
-  const { rating, title, comment } = req.body;
+  const { rating, title, comment } = req.body || {};
     
     // Validate input
     if (!productId) {
@@ -140,7 +140,7 @@ export const getProductRating = async (req, res) => {
 export const updateReview = async (req, res) => {
   try {
     const { reviewId } = req.params;
-    const { rating, title, comment } = req.body;
+    const { rating, title, comment } = req.body || {};
     
     // Validate input
     if (!reviewId) {
@@ -228,7 +228,7 @@ export const deleteReview = async (req, res) => {
 export const voteOnReview = async (req, res) => {
   try {
     const { reviewId } = req.params;
-    const { helpful } = req.body;
+    const { helpful } = req.body || {};
     
     // Validate input
     if (!reviewId) {

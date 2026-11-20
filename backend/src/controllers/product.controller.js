@@ -4,7 +4,7 @@ import Product from "../models/product.js";
 import uploadToCloudinary from "../utils/cloudinaryUpload.js";
 export const createProduct = async (req, res) => {
   try {
-    const { title, price, description, stock } = req.body;
+    const { title, price, description, stock } = req.body || {};
 
     if (!req.file) {
       return res.status(400).json({ message: "Image is required" });
@@ -48,7 +48,7 @@ export const updateProduct = async (req, res) => {
     return res.status(403).json({ message: "Not authorized to update this product" });
   }
 
-  const { title, description, price, stock } = req.body;
+  const { title, description, price, stock } = req.body || {};
 
   product.title = title || product.title;
   product.description = description || product.description;

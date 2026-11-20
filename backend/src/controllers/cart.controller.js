@@ -27,7 +27,7 @@ export const getCart = async (req, res) => {
  */
 export const addItemToCart = async (req, res) => {
   try {
-    const { productId, quantity = 1 } = req.body;
+    const { productId, quantity = 1 } = req.body || {};
     
     // Validate input
     if (!productId) {
@@ -73,7 +73,7 @@ export const addItemToCart = async (req, res) => {
  */
 export const updateCartItem = async (req, res) => {
   try {
-    const { productId, quantity } = req.body;
+    const { productId, quantity } = req.body || {};
     
     if (!productId) {
       return res.status(400).json({ message: "Product ID is required" });

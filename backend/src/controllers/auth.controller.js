@@ -3,12 +3,21 @@ import generateToken from "../utils/generateToken.js";
 
 export const registerUser = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const payload = req.body && typeof req.body === "object" ? req.body : {};
+    const { name, email, password, role } = payload;
+
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        message: "Please provide name, email and password",
+      });
+    }
 
     const userExists = await User.findOne({ email });
 
     if (userExists) {
-      return res.status(400).json({ message: "User already exists" });
+      return res.status(400).json({
+        message: "User already exists",
+      });
     }
 
     const allowedRoles = ["buyer", "vendor"];
@@ -29,14 +38,17 @@ export const registerUser = async (req, res) => {
       role: newUser.role,
       token: generateToken(newUser._id),
     });
-
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Register Error:", error);
+
+    res.status(500).json({
+      message: error.message,
+    });
   }
 };
 
 export const loginUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body || {};
 
   const existingUser = await User.findOne({ email });
 

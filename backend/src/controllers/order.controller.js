@@ -3,7 +3,7 @@ import Order from "../models/order.js";
 import Product from "../models/product.js";
 
 export const createOrder = async (req, res) => {
-  const { productId, quantity } = req.body;
+  const { productId, quantity } = req.body || {};
 
   if (!mongoose.Types.ObjectId.isValid(productId)) {
     return res.status(400).json({ message: "Invalid product ID" });
@@ -40,7 +40,7 @@ export const createOrder = async (req, res) => {
 };
 
 export const updateOrderStatus = async (req, res) => {
-  const { status } = req.body;
+  const { status } = req.body || {};
 
   const order = await Order.findById(req.params.id);
 

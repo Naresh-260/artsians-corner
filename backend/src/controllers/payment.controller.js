@@ -60,7 +60,7 @@ export const createPaymentOrder = async (req, res) => {
  */
 export const verifyPaymentAndCreateOrder = async (req, res) => {
   try {
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body || {};
 
     // Verify payment signature
     const body = razorpay_order_id + "|" + razorpay_payment_id;
@@ -151,7 +151,7 @@ export const getPaymentStatus = async (req, res) => {
  */
 export const refundPayment = async (req, res) => {
   try {
-    const { paymentId, amount, reason = 'requested_by_customer' } = req.body;
+    const { paymentId, amount, reason = 'requested_by_customer' } = req.body || {};
 
     const refund = await getRazorpay().refunds.create({
       payment_id: paymentId,
