@@ -13,10 +13,9 @@ import analyticsRoutes from "./routes/analytics.routes.js";
 const app = express();   
 
 app.use(cors({
-  origin: ["http://localhost:5173", "https://artsians-corner.vercel.app"],
+  origin: ["http://localhost:5173", "https://artisans-corner.vercel.app"],
   credentials: true
 }));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
